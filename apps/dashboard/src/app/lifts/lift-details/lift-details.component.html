@@ -1,0 +1,79 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title *ngIf="currentLift.id; else createNew">
+      <h1>Update {{ originalName }}</h1>
+    </mat-card-title>
+    <ng-template #createNew><h1>Create a New Lift</h1></ng-template>
+  </mat-card-header>
+  <form
+    [formGroup]="form"
+    #formDirective="ngForm"
+    (ngSubmit)="saveForm(formDirective)"
+  >
+    <mat-card-content>
+      <mat-form-field class="full-width" appearance="outline" floatlabel>
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          placeholder="Name"
+          formControlName="name"
+          type="text"
+          name="name"
+        />
+        <mat-error *ngIf="form.get('name')">Required Field</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width" appearance="outline" floatlabel>
+        <mat-label>Muscle Groups</mat-label>
+        <input
+          matInput
+          placeholder="Muscle Groups"
+          formControlName="muscleGroups"
+          type="text"
+          name="muscleGroups"
+        />
+        <mat-error *ngIf="form.get('muscleGroups')">Required Field</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width" appearance="outline" floatlabel>
+        <mat-label>One Rep</mat-label>
+        <input
+          matInput
+          placeholder="One Rep"
+          formControlName="myOneRep"
+          type="text"
+          name="myOneRep"
+        />
+        <mat-error *ngIf="form.get('myOneRep')">Required Field</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width" appearance="outline" floatlabel>
+        <mat-label>Sets/Reps</mat-label>
+        <input
+          matInput
+          placeholder="Sets/Reps"
+          formControlName="currentSetRep"
+          type="text"
+          name="currentSetRep"
+        />
+        <mat-error *ngIf="form.get('currentSetRep')">Required Field</mat-error>
+      </mat-form-field>
+      <section class="full-width">
+        <mat-label>
+          Percentage: {{ form.get('percentOfOneRep')?.value }} %
+        </mat-label>
+        <mat-slider
+          formControlName="percentOfOneRep"
+          min="0"
+          max="100"
+          class="full-width"
+          thumbLabel
+          tickInterval="1"
+        ></mat-slider>
+      </section>
+    </mat-card-content>
+    <mat-card-actions>
+      <button type="submit" mat-button [disabled]="form.invalid">
+        {{ currentLift.id ? 'Submit' : 'Create' }}
+      </button>
+      <button type="button" mat-button (click)="cancel()">Cancel</button>
+    </mat-card-actions>
+  </form>
+</mat-card>

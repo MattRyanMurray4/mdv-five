@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="col-50" layout="row" layout-align="center center">
+    <exercises-lifts-list
+      [lifts]="lifts$ | async"
+      (selected)="selectLift($event)"
+      (deleted)="deleteLift($event)"
+    ></exercises-lifts-list>
+  </div>
+  <div class="col-50" layout="row" layout-align="center center">
+    <exercises-lift-details
+      [form]="form"
+      [lift]="selectedLift$ | async"
+      (saved)="saveLift($event)"
+      (cancelled)="cancel()"
+    ></exercises-lift-details>
+  </div>
+</div>
